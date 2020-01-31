@@ -4,27 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Physics game</title>
+    <title>Game</title>
 </head>
 <body>
-    <div class="content">
-        <h2>Physics game</h2>
-
-        <p> To begain type any letter, try to find the letter that was randomly selected.</p>
-
-        <div class="inner-content">
-
-            <p id="wins"></p>
-            <p id="losses"></p>
-            <p id="guessesLeft"></p>
-            <p id="GuessesSoFar"></p>
-
-        </div>
-
+    <div class="wrapper">
+        <h2>Physics Game</h2>
+        <p>type any letter to start the game</p>
+        <p id ="wins"></p>
+        <p id ="losses"></p>
+        <p id ="guessleft"></p>
+        <p id = "guessfar"></p>
     </div>
 
-    <script src="assets/javascript/game.js"></script>
-    
-</body>
+    <script type="text/javascript">
 
+var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+var wins = 0;
+var losses = 0;
+var guessesLeft = 9;
+var userLetter = [];
+var cpuLetter = [];
+
+var guessesleftText = document.getElementById("guessleft");
+var guessfarText = document.getElementById("guessfar");
+var winsText = document.getElementById("wins");
+var lossesText = document.getElementById("losses");
+
+var cpuGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+cpuLetter.push(cpuGuess);
+
+document.onkeyup = function(event) {
+    var Guesses= event.key;
+    userLetter.push(Guesses);
+
+    if ((Guesses === cpuGuess) && (guessesLeft > 0)) {
+        wins++;
+        guessesLeft = 9;
+        userLetter.length = 0;
+        cpuLetter.length = 0;
+        var compGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        cpuLetter.push(cpuLetter);
+
+    }
+    else if ((userLetter !== cpuLetter[0]) && (guessesLeft > 0)) {
+        guessesLeft = guessesLeft-1;
+    }
+
+    else {
+        losses++;
+        guessesLeft = 9;
+        userLetter.length = 0;
+        cpuLetter.length = 0;
+        var compGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        cpuLetter.push(cpuGuess);
+    }
+
+        winsText.textContent = "Wins: " + wins;
+        lossesText.textContent = "Losses: " + losses;
+        guessleftText.textContent = "Guesses Left: " + guessesLeft;
+        guessfarText.textContent = "Guesses So Far: " + userLetter;
+}
+</script>
+</body>
 </html>
