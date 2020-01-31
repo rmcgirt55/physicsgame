@@ -1,38 +1,39 @@
-var wins=0;
-var losses=0;
-var guessesR=9;
+var wins = 0;
+var losses = 0;
+var guess = 9;
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var lettersTried = [];
+var lettersUsed = [];
 
-var Random = alphabet[Math.floor(Math.random () * alphabet.ength)];
+var randomletter = alphabet[Math.floor(Math.random () * alphabet.length)];
 
-var pwins = document.getElementById("wins");
-var plosses = document.getElementById("losses");
-var pguessesr = document.getElementById("guessesR");
-var plettersU = document.getElementById("guesseU")
+var postWins = document.getElementById("wins");
+var postLosses = document.getElementById("losses");
+var postguessesleft = document.getElementById("guessremaining");
+var postGuessesGuesses = document.getElementById("guessesSoFar")
 
-document.onkeyup = funtion(event) {
-    var userPick = event.key;
-    lettersTried.push(userPick);
+document.onkeyup = function(event) {
+    var userselected = event.key;
+    lettersUsed.push(userselected);
 
-    if (userPick=== computerPick) {
+    if (userselected === randomletter) {
         wins++;
-        computerPick= alphabet[Math.floor(math.random () * alphabet.length)];
-        guessesR=9;
-        lettersTried=[];
-    } elese {
-        guessesR --;
+        randomletter = alphabet[Math.floor(Math.random () * alphabet.length)];
+        guessremaining = 9;
+        lettersUsed = [];
+    } else {
+        guessremaining--;
     }
-    if (guessesR === 0) {
+    
+    if (guessremaining === 0) {
         losses++
-        computerPick = alphabet.length)];
-        guessesR = 9;
-        lettersTried=[];
+        randomletter = alphabet[Math.floor(Math.random () * alphabet.length)];
+        guessremaining = 9;
+        lettersUsed = [];
     }
 
-    pwins.innerHTML="Wins: " + wins;
-    plosses.innerHTML = "Losses: " + losses;
-    pguessesr.innerHTML= "Guesses Remaining: " + guessesR;
-    plettersU=innerHTML="Letters Used: " + lettersTried;
+postWins.innerHTML = "Wins: " + wins;
+postLosses.innerHTML = "Losses: " + losses;
+postguessesleft.innerHTML = "Guesses Left: " + guessremaining;
+postGuessesGuessed.innerHTML = "Letters Guesses: " + lettersUsed;
 
 };
